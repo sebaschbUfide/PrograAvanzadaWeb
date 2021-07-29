@@ -1,0 +1,120 @@
+﻿.breadcumb_area {
+    padding: 20px 0;
+}
+
+.main_cart_area {
+    background: none repeat scroll 0 0 #f7f8f9;
+    border-top: 1px solid #eeeeee;
+    padding: 80px 0;
+}
+
+
+.cart_heading {
+    background: none repeat scroll 0 0 #f2f3f4;
+    overflow: hidden;
+    padding: 15px 20px;
+}
+
+    .cart_heading .h_item1 {
+        float: left;
+        width: 41%;
+    }
+
+    .cart_heading .h_item2 {
+        float: left;
+        width: 18%;
+    }
+
+    .cart_heading .h_item3 {
+        float: left;
+        width: 24%;
+    }
+
+    .cart_heading .h_item4 {
+        float: left;
+        width: 17%;
+    }
+
+.h_item1 > p, .h_item2 > p, .h_item3 > p, .h_item4 > p {
+    color: #232323;
+    font-size: 13px;
+    margin-bottom: 0;
+    text-transform: uppercase;
+}
+
+.cart_item {
+    border-bottom: 1px solid #e8eaec;
+    overflow: hidden;
+    padding: 32px 0;
+}
+
+    .cart_item .cart_item_img {
+        float: left;
+        width: 41%;
+    }
+
+    .cart_item .cart_price {
+        float: left;
+        width: 18%;
+    }
+
+    .cart_item .cart_quantity {
+        float: left;
+        width: 24%;
+    }
+
+    .cart_item .cart_total {
+        float: left;
+        width: 17%;
+    }
+
+.cart_item_img > img {
+    float: left;
+    margin-right: 20px;
+}
+
+.cart_item_img > p {
+    color: #333333;
+    font-size: 12px;
+    margin-bottom: 0;
+    margin-top: 23px;
+    text-transform: uppercase;
+}
+
+.cart_price > p, .cart_quantity > p, .cart_total > p {
+    color: #333333;
+    font-size: 12px;
+    margin-bottom: 0;
+    margin-top: 31px;
+    text-transform: uppercase;
+}
+
+.cart_quantity ul {
+    list-style: outside none none;
+    margin: 29px 0 0;
+    padding: 0;
+}
+
+    .cart_quantity ul li {
+        float: left;
+        margin-right: 10px;
+    }
+
+ .cart_quantity ul li a {
+background: none repeat scroll 0 0 #fff;
+border: 1px solid #e8eaec;
+            color: #333;
+            display: block;
+            font-size: 12px;
+            height: 23px;
+            padding-top: 3px;
+            text-align: center;
+            width: 23px;
+        }
+
+            .cart_quantity ul li a:hover {
+                border: 1px solid #FF6766;
+                text-decoration: none;
+            }
+
+
