@@ -1,17 +1,14 @@
-using BackEnd.Entities;
-using BackEnd.Utilities;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-namespace BackEndAPI
+namespace FrontEndApi
 {
     public class Startup
     {
@@ -26,17 +23,8 @@ namespace BackEndAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            string projectPath = AppDomain.CurrentDomain.BaseDirectory.Split(new String[] { @"bin\" }, StringSplitOptions.None)[0];
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(projectPath)
-                .AddJsonFile("appsettings.json")
-                .Build();
-            string connectionString = configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<PrograAvanzadaWebBDContext>(options => options.UseSqlServer(connectionString));
-
-            //services.AddDbContext<NorthWndContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            Util.ConnectionString = connectionString;
         }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

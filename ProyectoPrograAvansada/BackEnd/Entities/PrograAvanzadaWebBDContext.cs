@@ -10,6 +10,8 @@ namespace BackEnd.Entities
     {
         public PrograAvanzadaWebBDContext()
         {
+            var optionsBuilder = new DbContextOptionsBuilder<PrograAvanzadaWebBDContext>();
+            optionsBuilder.UseSqlServer(Utilities.Util.ConnectionString);
         }
 
         public PrograAvanzadaWebBDContext(DbContextOptions<PrograAvanzadaWebBDContext> options)
