@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
+
 namespace FrontEndApi.Controllers
 {
     public class ProductoController : Controller
@@ -17,11 +18,13 @@ namespace FrontEndApi.Controllers
 
         private readonly IConfiguration _config;
         private string _URL;
+        private ServiceRepository serviceObj;
         public ProductoController(IConfiguration config)
         {
 
             _config = config;
             _URL = _config.GetValue<string>("Services:ProyectoPrograAvanzadaURL");
+            serviceObj = new ServiceRepository(_URL);
         }
         // GET: ProductoController
         public ActionResult Index()
@@ -33,7 +36,9 @@ namespace FrontEndApi.Controllers
                 response.EnsureSuccessStatusCode();
                 //List<Models.ProductoViewModel> productos = new List<Models.ProductoViewModel>();
                 var content = response.Content.ReadAsStringAsync().Result;
+                
                 List<Models.ProductoViewModel> productos = JsonConvert.DeserializeObject<List<Models.ProductoViewModel>>(content);
+
 
                 ViewBag.Title = "All productos";
                 return View(productos);
@@ -42,6 +47,7 @@ namespace FrontEndApi.Controllers
             {
                 throw;
             }
+
             catch (Exception)
             {
                 throw;
@@ -51,7 +57,15 @@ namespace FrontEndApi.Controllers
         // GET: ProductoController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            HttpResponseMessage response = serviceObj.GetResponse("api/producto/" + id.ToString());
+            response.EnsureSuccessStatusCode();
+            var content = response.Content.ReadAsStringAsync().Result;
+            Models.ProductoViewModel productoViewModel = JsonConvert.DeserializeObject<Models.ProductoViewModel>(content);
+
+
+
+            //ViewBag.Title = "All Products";
+            return View(productoViewModel);
         }
 
         // GET: ProductoController/Create
@@ -60,14 +74,17 @@ namespace FrontEndApi.Controllers
             return View();
         }
 
-        // POST: ProductoController/Create
+        // POST: CategoryController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Models.ProductoViewModel producto)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+
+                HttpResponseMessage response = serviceObj.PostResponse("api/producto", producto);
+                response.EnsureSuccessStatusCode();
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -78,17 +95,29 @@ namespace FrontEndApi.Controllers
         // GET: ProductoController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+
+            HttpResponseMessage response = serviceObj.GetResponse("api/producto/" + id.ToString());
+            response.EnsureSuccessStatusCode();
+            var content = response.Content.ReadAsStringAsync().Result;
+            Models.ProductoViewModel productoViewModel = JsonConvert.DeserializeObject<Models.ProductoViewModel>(content);
+
+
+
+            //ViewBag.Title = "All Products";
+            return View(productoViewModel);
         }
 
-        // POST: ProductoController/Edit/5
+        // POST: CategoryController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Models.ProductoViewModel producto)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+
+                HttpResponseMessage response = serviceObj.PutResponse("api/producto/", producto);
+                response.EnsureSuccessStatusCode();
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -99,17 +128,24 @@ namespace FrontEndApi.Controllers
         // GET: ProductoController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            HttpResponseMessage response = serviceObj.GetResponse("api/producto/" + id.ToString());
+            var content = response.Content.ReadAsStringAsync().Result;
+            Models.ProductoViewModel productoViewModel =
+                JsonConvert.DeserializeObject<Models.ProductoViewModel>(content);
+            return View(productoViewModel);
         }
-
-        // POST: ProductoController/Delete/5
+        
+        // POST: CategoryController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Models.ProductoViewModel producto)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+
+                HttpResponseMessage response = serviceObj.DeleteResponse("api/producto/" + producto.ProdId.ToString());
+                response.EnsureSuccessStatusCode();
+                return RedirectToAction("Index");
             }
             catch
             {
