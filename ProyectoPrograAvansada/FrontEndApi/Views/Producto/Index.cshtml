@@ -3,47 +3,35 @@
 @{
     ViewData["Title"] = "Index";
 }
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @foreach (var item in Model)
+            {
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.ProdName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProdDescrip)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProdPrecio)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.ProdName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProdDescrip)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProdPrecio)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.ProdId  }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ProdId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProdId })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                <div class="col mb-5">
+                    <div class="card h-100 ">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">@item.ProdName</h5>
+                                <!-- Product price-->
+                                @item.ProdPrecio
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent ColorVerdeHeader">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                        </div>
+                    </div>
+                </div>
+
+
+            }
+        </div>
+    </div>
+</section>
