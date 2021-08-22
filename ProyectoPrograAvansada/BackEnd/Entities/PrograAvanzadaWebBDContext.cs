@@ -1,4 +1,6 @@
 ﻿using System;
+using BackEnd.Authentication;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -6,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BackEnd.Entities
 {
-    public partial class PrograAvanzadaWebBDContext : DbContext
+    public partial class PrograAvanzadaWebBDContext : IdentityDbContext<ApplicationUser>
     {
         public PrograAvanzadaWebBDContext()
         {

@@ -46,7 +46,7 @@ namespace FrontEndApi
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Producto}/{action=Index}/{id?}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
             });
         }
     }
