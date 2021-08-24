@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace FrontEndAPI.REST
+namespace FrontEndApi.REST
 {
     public class ServiceRepository
     {
