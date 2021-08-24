@@ -1,5 +1,6 @@
-﻿using FrontEndAPI.Models;
-using FrontEndAPI.REST;
+﻿using FrontEndApi.Models;
+using FrontEndApi.REST;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,7 @@ namespace FrontEndAPI.Controllers
         {
 
             _config = config;
-            _URL = _config.GetValue<string>("Services:NorthWindURL");
+            _URL = _config.GetValue<string>("Services:ProyectoPrograAvanzadaURL");
             serviceObj = new ServiceRepository(_URL);
         }
 

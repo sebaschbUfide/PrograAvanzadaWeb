@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FrontEndAPI.Models
+namespace FrontEndApi.Models
 {
     public class TokenModel
     {
