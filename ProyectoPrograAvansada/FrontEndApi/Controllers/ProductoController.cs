@@ -30,7 +30,7 @@ namespace FrontEndApi.Controllers
         public ActionResult Index()
         {
             try
-            {
+            {  
                 ServiceRepository serviceObj = new ServiceRepository(_URL);
                 HttpResponseMessage response = serviceObj.GetResponse("api/Producto");
                 response.EnsureSuccessStatusCode();
