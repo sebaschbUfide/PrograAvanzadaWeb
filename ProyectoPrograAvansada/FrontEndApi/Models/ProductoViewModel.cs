@@ -19,6 +19,6 @@ namespace FrontEndApi.Models
         public string ProdDescrip { get; set; }
 
        
-        public decimal? ProdPrecio { get; set; }
+        public decimal ProdPrecio { get; set; }
     }
 }

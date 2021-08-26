@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using FrontEndApi.Extensions;
 using FrontEndApi.REST;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace FrontEndApi.Controllers
 {
     public class ProductoController : Controller
     {
-
-
         private readonly IConfiguration _config;
         private string _URL;
-        private ServiceRepository serviceObj;
+        ServiceRepository serviceObj;
         public ProductoController(IConfiguration config)
         {
 
@@ -30,24 +28,21 @@ namespace FrontEndApi.Controllers
         public ActionResult Index()
         {
             try
-            {
+            {  
                 ServiceRepository serviceObj = new ServiceRepository(_URL);
-                HttpResponseMessage response = serviceObj.GetResponse("api/Producto");
+                HttpResponseMessage response = serviceObj.GetResponse("api/producto");
                 response.EnsureSuccessStatusCode();
-                //List<Models.ProductoViewModel> productos = new List<Models.ProductoViewModel>();
+
                 var content = response.Content.ReadAsStringAsync().Result;
-                
                 List<Models.ProductoViewModel> productos = JsonConvert.DeserializeObject<List<Models.ProductoViewModel>>(content);
 
-
-                ViewBag.Title = "All productos";
+                ViewBag.Title = "All Productos";
                 return View(productos);
             }
             catch (HttpRequestException)
             {
                 throw;
             }
-
             catch (Exception)
             {
                 throw;
@@ -57,24 +52,21 @@ namespace FrontEndApi.Controllers
         // GET: ProductoController/Details/5
         public ActionResult Details(int id)
         {
+
             HttpResponseMessage response = serviceObj.GetResponse("api/producto/" + id.ToString());
-            response.EnsureSuccessStatusCode();
             var content = response.Content.ReadAsStringAsync().Result;
-            Models.ProductoViewModel productoViewModel = JsonConvert.DeserializeObject<Models.ProductoViewModel>(content);
-
-
-
-            //ViewBag.Title = "All Products";
+            Models.ProductoViewModel productoViewModel =
+                JsonConvert.DeserializeObject<Models.ProductoViewModel>(content);
             return View(productoViewModel);
         }
 
-        // GET: ProductoController/Create
+        // GET: CategoryController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CategoryController/Create
+        // POST: personaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Models.ProductoViewModel producto)
@@ -92,18 +84,14 @@ namespace FrontEndApi.Controllers
             }
         }
 
-        // GET: ProductoController/Edit/5
+        // GET: CategoryController/Edit/5
         public ActionResult Edit(int id)
         {
 
             HttpResponseMessage response = serviceObj.GetResponse("api/producto/" + id.ToString());
-            response.EnsureSuccessStatusCode();
             var content = response.Content.ReadAsStringAsync().Result;
-            Models.ProductoViewModel productoViewModel = JsonConvert.DeserializeObject<Models.ProductoViewModel>(content);
-
-
-
-            //ViewBag.Title = "All Products";
+            Models.ProductoViewModel productoViewModel =
+                JsonConvert.DeserializeObject<Models.ProductoViewModel>(content);
             return View(productoViewModel);
         }
 
@@ -114,10 +102,9 @@ namespace FrontEndApi.Controllers
         {
             try
             {
-
-                HttpResponseMessage response = serviceObj.PutResponse("api/producto/", producto);
+                HttpResponseMessage response = serviceObj.PutResponse("api/producto", producto);
                 response.EnsureSuccessStatusCode();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = producto.ProdId});
             }
             catch
             {
@@ -125,7 +112,7 @@ namespace FrontEndApi.Controllers
             }
         }
 
-        // GET: ProductoController/Delete/5
+        // GET: CategoryController/Delete/5
         public ActionResult Delete(int id)
         {
             HttpResponseMessage response = serviceObj.GetResponse("api/producto/" + id.ToString());
@@ -134,7 +121,7 @@ namespace FrontEndApi.Controllers
                 JsonConvert.DeserializeObject<Models.ProductoViewModel>(content);
             return View(productoViewModel);
         }
-        
+
         // POST: CategoryController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -152,5 +139,74 @@ namespace FrontEndApi.Controllers
                 return View();
             }
         }
+
+
+        public IActionResult GetProductos(int? idproducto)
+        {
+            ServiceRepository serviceObj = new ServiceRepository(_URL);
+            HttpResponseMessage response = serviceObj.GetResponse("api/producto");
+            response.EnsureSuccessStatusCode();
+
+            var content = response.Content.ReadAsStringAsync().Result;
+            if (idproducto != null)
+            {
+                List<int> carrito;
+                if (HttpContext.Session.GetObject<List<int>>("CARRITO") == null)
+                {
+                    carrito = new List<int>();
+                }
+                else
+                {
+                    carrito = HttpContext.Session.GetObject<List<int>>("CARRITO");
+                }
+                if (carrito.Contains(idproducto.Value) == false)
+                {
+                    carrito.Add(idproducto.Value);
+                    HttpContext.Session.SetObject("CARRITO", carrito);
+                }
+            }
+            List<Models.ProductoViewModel> productos = JsonConvert.DeserializeObject<List<Models.ProductoViewModel>>(content);
+            return View(productos);
+        }
+
+        public IActionResult Carrito(int? idproducto)
+        {
+            ServiceRepository serviceObj = new ServiceRepository(_URL);
+            HttpResponseMessage response = serviceObj.GetResponse("api/producto");
+            response.EnsureSuccessStatusCode();
+
+            var content = response.Content.ReadAsStringAsync().Result;
+            List<int> carrito = HttpContext.Session.GetObject<List<int>>("CARRITO");
+            if (carrito == null)
+            {
+                return View();
+            }
+            else
+            {
+                if (idproducto != null)
+                {
+                    carrito.Remove(idproducto.Value);
+                    HttpContext.Session.SetObject("CARRITO", carrito);
+                }
+
+                List<Models.ProductoViewModel> productos = JsonConvert.DeserializeObject<List<Models.ProductoViewModel>>(content);
+                return View(productos);
+            }
+        }
+
+        public IActionResult Pedidos()
+        {
+            ServiceRepository serviceObj = new ServiceRepository(_URL);
+            HttpResponseMessage response = serviceObj.GetResponse("api/producto");
+            response.EnsureSuccessStatusCode();
+
+            var content = response.Content.ReadAsStringAsync().Result;
+            List<int> carrito = HttpContext.Session.GetObject<List<int>>("CARRITO");
+            List<Models.ProductoViewModel> productos = JsonConvert.DeserializeObject<List<Models.ProductoViewModel>>(content);
+            HttpContext.Session.Remove("CARRITO");
+            return View(productos);
+        }
     }
 }
+   /* }
+}*/
