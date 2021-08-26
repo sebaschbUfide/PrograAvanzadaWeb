@@ -5,7 +5,32 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
+    <Compile Include="obj\Debug\netcoreapp3.1\.NETCoreApp,Version=v3.1.AssemblyAttributes.cs" />
+    <Compile Include="obj\Debug\netcoreapp3.1\BackEnd.AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\netcoreapp3.1\BackEnd.deps.json" />
+    <Content Include="bin\Debug\netcoreapp3.1\BackEnd.runtimeconfig.dev.json" />
+    <Content Include="bin\Debug\netcoreapp3.1\BackEnd.runtimeconfig.json" />
+    <Content Include="obj\BackEnd.csproj.nuget.dgspec.json" />
+    <Content Include="obj\Debug\netcoreapp3.1\BackEnd.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\project.assets.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\netcoreapp3.1\BackEnd.dll" />
+    <None Include="bin\Debug\netcoreapp3.1\BackEnd.pdb" />
+    <None Include="obj\BackEnd.csproj.nuget.g.props" />
+    <None Include="obj\BackEnd.csproj.nuget.g.targets" />
+    <None Include="obj\Debug\netcoreapp3.1\BackEnd.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\BackEnd.assets.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\BackEnd.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\BackEnd.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\BackEnd.dll" />
+    <None Include="obj\Debug\netcoreapp3.1\BackEnd.genruntimeconfig.cache" />
+    <None Include="obj\Debug\netcoreapp3.1\BackEnd.pdb" />
+    <None Include="obj\project.nuget.cache" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +49,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\" />
   </ItemGroup>
 
 </Project>

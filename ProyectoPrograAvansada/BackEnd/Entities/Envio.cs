@@ -9,10 +9,10 @@ namespace BackEnd.Entities
     {
         public int EnvioId { get; set; }
         public int ClienteId { get; set; }
-        public int ContizacionId { get; set; }
+        public int CotizacionId { get; set; }
         public string Direccion { get; set; }
 
         public virtual Registro Cliente { get; set; }
-        public virtual Cotizacion Contizacion { get; set; }
+        public virtual Cotizacion Cotizacion { get; set; }
     }
 }

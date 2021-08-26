@@ -18,8 +18,6 @@ namespace BackEnd.Entities
         public int ProdId { get; set; }
         public int ClienteId { get; set; }
 
-        public virtual Registro Cliente { get; set; }
-        public virtual Producto Prod { get; set; }
         public virtual ICollection<Envio> Envios { get; set; }
     }
 }

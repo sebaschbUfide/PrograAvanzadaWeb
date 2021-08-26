@@ -9,7 +9,6 @@ namespace BackEnd.Entities
     {
         public Registro()
         {
-            Cotizacions = new HashSet<Cotizacion>();
             Envios = new HashSet<Envio>();
         }
 
@@ -18,9 +17,8 @@ namespace BackEnd.Entities
         public string ClientePassword { get; set; }
         public string ClienteName { get; set; }
         public int RolId { get; set; }
+        public int ClienteId1 { get; set; }
 
-        public virtual Rol Rol { get; set; }
-        public virtual ICollection<Cotizacion> Cotizacions { get; set; }
         public virtual ICollection<Envio> Envios { get; set; }
     }
 }
