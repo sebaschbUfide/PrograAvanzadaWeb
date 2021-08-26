@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<int> carrito = Context.Session.GetObject<List<int>>("CARRITO");
 }
 
 <section class="py-5">
@@ -22,13 +23,17 @@
                 <!-- Product name-->
                 <h5 class="fw-bolder">@item.ProdName</h5>
                 <!-- Product price-->
-                @item.ProdPrecio
+                <h4>₡</h4> @item.ProdPrecio
             </div>
         </div>
-        <!-- Product actions-->
-        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent ColorVerdeHeader">
-            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-        </div>
+        @if (carrito != null && carrito.Contains(item.ProdId))
+        {
+            <button disabled class="btn btn-outline-danger disabled">En carrito</button> }
+        else
+        {
+            <a class="btn btn-outline-success" asp-action="Index" asp-controller="Producto" asp-route-idproducto="@item.ProdId">
+                Añadir a carrito
+            </a>            }
     </div>
 </div>            }
         </div>

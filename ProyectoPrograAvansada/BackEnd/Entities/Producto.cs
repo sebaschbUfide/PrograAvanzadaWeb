@@ -17,6 +17,7 @@ namespace BackEnd.Entities
         public string ProdName { get; set; }
         public string ProdDescrip { get; set; }
         public decimal? ProdPrecio { get; set; }
+        
 
         public virtual ICollection<CategoriaProd> CategoriaProds { get; set; }
         public virtual ICollection<Cotizacion> Cotizacions { get; set; }

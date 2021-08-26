@@ -25,29 +25,29 @@ namespace FrontEndApi.Controllers
             serviceObj = new ServiceRepository(_URL);
         }
         // GET: ProductoController
-        public ActionResult Index()
-        {
-            try
-            {  
-                ServiceRepository serviceObj = new ServiceRepository(_URL);
-                HttpResponseMessage response = serviceObj.GetResponse("api/producto");
-                response.EnsureSuccessStatusCode();
+        //public ActionResult Index()
+        //{
+        //    try
+        //    {  
+        //        ServiceRepository serviceObj = new ServiceRepository(_URL);
+        //        HttpResponseMessage response = serviceObj.GetResponse("api/producto");
+        //        response.EnsureSuccessStatusCode();
 
-                var content = response.Content.ReadAsStringAsync().Result;
-                List<Models.ProductoViewModel> productos = JsonConvert.DeserializeObject<List<Models.ProductoViewModel>>(content);
+        //        var content = response.Content.ReadAsStringAsync().Result;
+        //        List<Models.ProductoViewModel> productos = JsonConvert.DeserializeObject<List<Models.ProductoViewModel>>(content);
 
-                ViewBag.Title = "All Productos";
-                return View(productos);
-            }
-            catch (HttpRequestException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //        ViewBag.Title = "All Productos";
+        //        return View(productos);
+        //    }
+        //    catch (HttpRequestException)
+        //    {
+        //        throw;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
         // GET: ProductoController/Details/5
         public ActionResult Details(int id)
@@ -141,7 +141,7 @@ namespace FrontEndApi.Controllers
         }
 
 
-        public IActionResult GetProductos(int? idproducto)
+        public IActionResult Index(int? idproducto)
         {
             ServiceRepository serviceObj = new ServiceRepository(_URL);
             HttpResponseMessage response = serviceObj.GetResponse("api/producto");
