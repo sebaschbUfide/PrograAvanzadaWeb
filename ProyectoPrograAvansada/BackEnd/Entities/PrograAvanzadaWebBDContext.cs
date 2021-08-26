@@ -31,6 +31,7 @@ namespace BackEnd.Entities
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+
             optionsBuilder.UseSqlServer(Utilities.Util.ConnectionString);
             optionsBuilder.EnableSensitiveDataLogging(true);
             base.OnConfiguring(optionsBuilder);
@@ -43,7 +44,7 @@ namespace BackEnd.Entities
             modelBuilder.Entity<CategoriaProd>(entity =>
             {
                 entity.HasKey(e => e.CategoriaId)
-                    .HasName("PK__Categori__C928AD5293E51DDA");
+                    .HasName("PK__Categori__C928AD52D8E97F92");
 
                 entity.ToTable("Categoria_prod");
 
@@ -62,19 +63,19 @@ namespace BackEnd.Entities
                     .WithMany(p => p.CategoriaProds)
                     .HasForeignKey(d => d.ProdId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Categoria__Prod___48CFD27E");
+                    .HasConstraintName("FK__Categoria__Prod___34C8D9D1");
 
                 entity.HasOne(d => d.Prov)
                     .WithMany(p => p.CategoriaProds)
                     .HasForeignKey(d => d.ProvId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Categoria__prov___49C3F6B7");
+                    .HasConstraintName("FK__Categoria__prov___35BCFE0A");
             });
 
             modelBuilder.Entity<Cotizacion>(entity =>
             {
                 entity.HasKey(e => e.ContizacionId)
-                    .HasName("PK__Cotizaci__791E8F1C938DFB87");
+                    .HasName("PK__Cotizaci__791E8F1CD2D6EF4E");
 
                 entity.ToTable("Cotizacion");
 
@@ -98,13 +99,13 @@ namespace BackEnd.Entities
                     .WithMany(p => p.Cotizacions)
                     .HasForeignKey(d => d.ClienteId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Cotizacio__clien__4222D4EF");
+                    .HasConstraintName("FK__Cotizacio__clien__2E1BDC42");
 
                 entity.HasOne(d => d.Prod)
                     .WithMany(p => p.Cotizacions)
                     .HasForeignKey(d => d.ProdId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Cotizacio__Prod___412EB0B6");
+                    .HasConstraintName("FK__Cotizacio__Prod___2D27B809");
             });
 
             modelBuilder.Entity<Envio>(entity =>
@@ -125,19 +126,19 @@ namespace BackEnd.Entities
                     .WithMany(p => p.Envios)
                     .HasForeignKey(d => d.ClienteId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Envio__cliente_i__44FF419A");
+                    .HasConstraintName("FK__Envio__cliente_i__30F848ED");
 
                 entity.HasOne(d => d.Contizacion)
                     .WithMany(p => p.Envios)
                     .HasForeignKey(d => d.ContizacionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Envio__contizaci__45F365D3");
+                    .HasConstraintName("FK__Envio__contizaci__31EC6D26");
             });
 
             modelBuilder.Entity<Producto>(entity =>
             {
                 entity.HasKey(e => e.ProdId)
-                    .HasName("PK__Producto__C55AC32B2DB36EA3");
+                    .HasName("PK__Producto__C55AC32BF556F7E2");
 
                 entity.ToTable("Producto");
 
@@ -161,7 +162,7 @@ namespace BackEnd.Entities
             modelBuilder.Entity<Proveedor>(entity =>
             {
                 entity.HasKey(e => e.ProvId)
-                    .HasName("PK__Proveedo__435F53262835369E");
+                    .HasName("PK__Proveedo__435F5326B5D32F81");
 
                 entity.ToTable("Proveedor");
 
@@ -181,7 +182,7 @@ namespace BackEnd.Entities
             modelBuilder.Entity<Registro>(entity =>
             {
                 entity.HasKey(e => e.ClienteId)
-                    .HasName("PK__Registro__47E34D64D588592C");
+                    .HasName("PK__Registro__47E34D643429E5FE");
 
                 entity.ToTable("Registro");
 
@@ -213,7 +214,7 @@ namespace BackEnd.Entities
                     .WithMany(p => p.Registros)
                     .HasForeignKey(d => d.RolId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Registro__Rol_id__3A81B327");
+                    .HasConstraintName("FK__Registro__Rol_id__267ABA7A");
             });
 
             modelBuilder.Entity<Rol>(entity =>
