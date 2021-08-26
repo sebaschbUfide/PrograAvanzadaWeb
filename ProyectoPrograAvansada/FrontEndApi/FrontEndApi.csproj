@@ -15,12 +15,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Producto\Create.cshtml" />
+    <None Include="Views\Producto\Delete.cshtml" />
+    <None Include="Views\Producto\Details.cshtml" />
+    <None Include="Views\Producto\Edit.cshtml" />
+    <None Include="Views\Producto\Index.cshtml" />
     <None Include="wwwroot\assets\favicon.ico" />
     <None Include="wwwroot\css\styles.css" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
