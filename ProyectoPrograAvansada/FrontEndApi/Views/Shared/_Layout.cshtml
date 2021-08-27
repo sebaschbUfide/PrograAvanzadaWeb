@@ -38,8 +38,10 @@
                         <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             @Html.ActionLink("Carrito", "Carrito")
-                            Carrito
+
                         </button>
+                        <input type="button" class="btn btn-outline-dark" value="Registrar" onclick="location.href='@Url.Action("Register", "Account")'"/>
+                        <input type="button" class="btn btn-outline-dark" value="Iniciar Sesion" onclick="location.href='@Url.Action("Login", "Account")'"/>
                     </form>
                 </div>
             </div>

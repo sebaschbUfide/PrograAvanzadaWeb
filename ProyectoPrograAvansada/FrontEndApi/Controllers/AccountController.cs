@@ -1,6 +1,5 @@
 ﻿using FrontEndApi.Models;
 using FrontEndApi.REST;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +17,8 @@ namespace FrontEndAPI.Controllers
     {
 
         private readonly UserManager<IdentityUser> userManager;
+
+
         private readonly SignInManager<IdentityUser> signInManager;
 
 

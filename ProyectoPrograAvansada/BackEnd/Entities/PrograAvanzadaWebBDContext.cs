@@ -31,7 +31,6 @@ namespace BackEnd.Entities
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
             optionsBuilder.UseSqlServer(Utilities.Util.ConnectionString);
             optionsBuilder.EnableSensitiveDataLogging(true);
             base.OnConfiguring(optionsBuilder);
@@ -45,7 +44,7 @@ namespace BackEnd.Entities
             modelBuilder.Entity<CategoriaProd>(entity =>
             {
                 entity.HasKey(e => e.CategoriaId)
-                    .HasName("PK__Categori__C928AD52D8E97F92");
+                    .HasName("PK__Categori__C928AD52B361B141");
 
                 entity.ToTable("Categoria_prod");
 
@@ -64,19 +63,19 @@ namespace BackEnd.Entities
                     .WithMany(p => p.CategoriaProds)
                     .HasForeignKey(d => d.ProdId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Categoria__Prod___34C8D9D1");
+                    .HasConstraintName("FK__Categoria__Prod___0D7A0286");
 
                 entity.HasOne(d => d.Prov)
                     .WithMany(p => p.CategoriaProds)
                     .HasForeignKey(d => d.ProvId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Categoria__prov___35BCFE0A");
+                    .HasConstraintName("FK__Categoria__prov___0E6E26BF");
             });
 
             modelBuilder.Entity<Cotizacion>(entity =>
             {
                 entity.HasKey(e => e.ContizacionId)
-                    .HasName("PK__Cotizaci__791E8F1CD2D6EF4E");
+                    .HasName("PK__Cotizaci__791E8F1CFB435E6D");
 
                 entity.ToTable("Cotizacion");
 
@@ -95,51 +94,33 @@ namespace BackEnd.Entities
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("produc_name");
-
-                entity.HasOne(d => d.Cliente)
-                    .WithMany(p => p.Cotizacions)
-                    .HasForeignKey(d => d.ClienteId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Cotizacio__clien__2E1BDC42");
-
-                entity.HasOne(d => d.Prod)
-                    .WithMany(p => p.Cotizacions)
-                    .HasForeignKey(d => d.ProdId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Cotizacio__Prod___2D27B809");
             });
 
             modelBuilder.Entity<Envio>(entity =>
             {
                 entity.ToTable("Envio");
 
-                entity.Property(e => e.EnvioId).HasColumnName("Envio_id");
-
-                entity.Property(e => e.ClienteId).HasColumnName("cliente_id");
-
-                entity.Property(e => e.ContizacionId).HasColumnName("contizacion_id");
-
                 entity.Property(e => e.Direccion)
-                    .HasMaxLength(225)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Cliente)
                     .WithMany(p => p.Envios)
                     .HasForeignKey(d => d.ClienteId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Envio__cliente_i__30F848ED");
+                    .HasConstraintName("FK__Envio__ClienteId__17036CC0");
 
-                entity.HasOne(d => d.Contizacion)
+                entity.HasOne(d => d.Cotizacion)
                     .WithMany(p => p.Envios)
-                    .HasForeignKey(d => d.ContizacionId)
+                    .HasForeignKey(d => d.CotizacionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Envio__contizaci__31EC6D26");
+                    .HasConstraintName("FK__Envio__Cotizacio__17F790F9");
             });
 
             modelBuilder.Entity<Producto>(entity =>
             {
                 entity.HasKey(e => e.ProdId)
-                    .HasName("PK__Producto__C55AC32BF556F7E2");
+                    .HasName("PK__Producto__C55AC32B76F90CFF");
 
                 entity.ToTable("Producto");
 
@@ -149,6 +130,10 @@ namespace BackEnd.Entities
                     .HasMaxLength(30)
                     .IsUnicode(false)
                     .HasColumnName("Prod_descrip");
+
+                entity.Property(e => e.ProdImg)
+                    .HasColumnType("image")
+                    .HasColumnName("Prod_img");
 
                 entity.Property(e => e.ProdName)
                     .HasMaxLength(30)
@@ -163,7 +148,7 @@ namespace BackEnd.Entities
             modelBuilder.Entity<Proveedor>(entity =>
             {
                 entity.HasKey(e => e.ProvId)
-                    .HasName("PK__Proveedo__435F5326B5D32F81");
+                    .HasName("PK__Proveedo__435F53262835369E");
 
                 entity.ToTable("Proveedor");
 
@@ -183,7 +168,7 @@ namespace BackEnd.Entities
             modelBuilder.Entity<Registro>(entity =>
             {
                 entity.HasKey(e => e.ClienteId)
-                    .HasName("PK__Registro__47E34D643429E5FE");
+                    .HasName("PK__Registro__47E34D643DB9421F");
 
                 entity.ToTable("Registro");
 
@@ -196,6 +181,10 @@ namespace BackEnd.Entities
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("cliente_Email");
+
+                entity.Property(e => e.ClienteId1)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("ClienteId");
 
                 entity.Property(e => e.ClienteName)
                     .IsRequired()
@@ -210,12 +199,6 @@ namespace BackEnd.Entities
                     .HasColumnName("cliente_password");
 
                 entity.Property(e => e.RolId).HasColumnName("Rol_id");
-
-                entity.HasOne(d => d.Rol)
-                    .WithMany(p => p.Registros)
-                    .HasForeignKey(d => d.RolId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Registro__Rol_id__267ABA7A");
             });
 
             modelBuilder.Entity<Rol>(entity =>

@@ -5,31 +5,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Register</h1>
+<h1>Registro de Usuario</h1>
 
-<h4>RegisterViewModel</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Register" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
+                <label asp-for="Email" class="control-label">Correo</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
+                <label asp-for="Password" class="control-label">Contraseña</label>
                 <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ComfirmPassword" class="control-label"></label>
+                <label asp-for="ComfirmPassword" class="control-label">Confirmar Contraseña</label>
                 <input asp-for="ComfirmPassword" class="form-control" />
                 <span asp-validation-for="ComfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Register" class="btn btn-primary" />
+                <input type="submit" value="Register" class="btn btn-primary" style="color:green;" />
             </div>
         </form>
     </div>
